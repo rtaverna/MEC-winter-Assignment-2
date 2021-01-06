@@ -12,9 +12,7 @@ return newArray
 
 }
 
-// export default dealCards
-
-//testing code we will delete this
+ export default dealCards
 
 let deck_of_cards = [1,2,3,4,5,6,7,8,9,10,10,10,10, 1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10]
 let hand = dealCards( deck_of_cards)
