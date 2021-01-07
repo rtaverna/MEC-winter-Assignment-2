@@ -1,4 +1,3 @@
-  
 /*
   --- WE ARE NOT USING THIS FILE ANYMORE, THIS FILE IS JUST FOR REFERENCE ---
   MEC TTP 2021 Winter Assignment 2: Blackjack Game Engine
@@ -57,12 +56,12 @@
     sum_hand(dealer_hand) >= sum_hand(player_hand)
  */
 
- let deck = [1,2,3,4,5,6,7,8,9,10]
- let dealer_hand = []
- let player_hand = []
+let deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let dealer_hand = []
+let player_hand = []
 
 /**
- * Deal 2 cards to the player and the dealer 
+ * Deal 2 cards to the player and the dealer
  */
 // function deal_cards () {
 //   for (let i = 0; i < 2; i++) {
@@ -89,12 +88,12 @@ function promptChoice(question) {
   }
 }
 
-function displaySum () {
+function displaySum() {
   console.log('Your sum: ', sumHand(player_hand))
-  console.log('Dealer\'s hand sum:', sumHand(dealer_hand))
+  console.log("Dealer's hand sum:", sumHand(dealer_hand))
 }
 
-function determineOutcome () {
+function determineOutcome() {
   if (sumHand(dealer_hand) > sumHand(player_hand)) {
     console.log('YOU LOSE')
   } else {
@@ -102,7 +101,7 @@ function determineOutcome () {
   }
 }
 
-function reset () {
+function reset() {
   // Needs to replenish deck of cards
   // Clear player_hand, dealer_hand
 
@@ -115,40 +114,39 @@ function reset () {
   dealer_hand = []
 }
 
-function hit () {
+function hit() {
   giveCard(player_hand)
 }
 
-function stand () {
+function stand() {
   displaySum(player_hand, dealer_hand)
   determineOutcome(player_hand, dealer_hand)
 }
 
-function sumHand (hand) {
-  let sum = 0;
-  for(let i = 0; i < hand.length; i++)
-  {
+function sumHand(hand) {
+  let sum = 0
+  for (let i = 0; i < hand.length; i++) {
     sum += hand[i]
   }
   return sum
-} 
-
-function dealCards (deck) {
-  // Randomly take cards from deck and put in hand
-  
-  let random1 = Math.floor(Math.random() * Math.floor(deck.length));
- //console.log (deck[random1])
-  //console.log (deck)
-  let random2 = Math.floor(Math.random() * Math.floor(deck.length));
- // console.log (deck[random2])
- let temphand = deck.splice (random2, 1)
- let newArray = temphand.concat(deck.splice (random1, 1))
-
- return newArray
 }
 
-function giveCard(deck, hand, num){
-  for (i = 0; i < num; i++){
+function dealCards() {
+  // Randomly take cards from deck and put in hand
+
+  let random1 = Math.floor(Math.random() * Math.floor(deck.length))
+  //console.log (deck[random1])
+  //console.log (deck)
+  let random2 = Math.floor(Math.random() * Math.floor(deck.length))
+  // console.log (deck[random2])
+  let temphand = deck.splice(random2, 1)
+  let newArray = temphand.concat(deck.splice(random1, 1))
+
+  return newArray
+}
+
+function giveCard(deck, hand, num) {
+  for (i = 0; i < num; i++) {
     hand.push(dealCard(deck))
   }
 }
