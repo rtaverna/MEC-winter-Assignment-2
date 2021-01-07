@@ -115,7 +115,8 @@ function reset() {
 }
 
 function hit() {
-  giveCard(player_hand)
+  giveCard(player_hand, 1)
+  displaySum()
 }
 
 function stand() {
@@ -131,28 +132,30 @@ function sumHand(hand) {
   return sum
 }
 
-function dealCards() {
+function dealCard() {
   // Randomly take cards from deck and put in hand
 
-  let random1 = Math.floor(Math.random() * Math.floor(deck.length))
+  let randomCardIndex = Math.floor(Math.random() * Math.floor(deck.length))
   //console.log (deck[random1])
   //console.log (deck)
-  let random2 = Math.floor(Math.random() * Math.floor(deck.length))
+  // let random2 = Math.floor(Math.random() * Math.floor(deck.length))
   // console.log (deck[random2])
-  let temphand = deck.splice(random2, 1)
-  let newArray = temphand.concat(deck.splice(random1, 1))
+  let [card] = deck.splice(randomCardIndex, 1)
+  // let newArray = temphand.concat(deck.splice(random1, 1))
 
-  return newArray
+  return card
 }
 
-function giveCard(deck, hand, num) {
+function giveCard(hand, num) {
+  // hand.push(...dealCards(deck))
   for (i = 0; i < num; i++) {
     hand.push(dealCard(deck))
   }
 }
 
 function start() {
-  dealCards()
+  giveCard(player_hand, 2)
+  giveCard(dealer_hand, 2)
   displaySum()
 
   let playHit = promptChoice('Do you want to hit? (yes/no)')
