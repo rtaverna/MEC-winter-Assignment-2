@@ -89,12 +89,12 @@ function promptChoice(question) {
   }
 }
 
-function displaySum (player_hand, dealer_hand) {
+function displaySum () {
   console.log('Your sum: ', sumHand(player_hand))
   console.log('Dealer\'s hand sum:', sumHand(dealer_hand))
 }
 
-function determineOutcome (player_hand, dealer_hand) {
+function determineOutcome () {
   if (sumHand(dealer_hand) > sumHand(player_hand)) {
     console.log('YOU LOSE')
   } else {
@@ -102,11 +102,11 @@ function determineOutcome (player_hand, dealer_hand) {
   }
 }
 
-function reset (deck, player_hand, dealer_hand) {
+function reset () {
   // Needs to replenish deck of cards
   // Clear player_hand, dealer_hand
 
-  deck.splice(0, deck.length)
+  deck = []
   for (let i = 0; i < 10; i++) {
     deck.push(i + 1)
   }
@@ -115,11 +115,11 @@ function reset (deck, player_hand, dealer_hand) {
   dealer_hand = []
 }
 
-function hit (hand) {
-  giveCard(hand)
+function hit () {
+  giveCard(player_hand)
 }
 
-function stand (player_hand, dealer_hand) {
+function stand () {
   displaySum(player_hand, dealer_hand)
   determineOutcome(player_hand, dealer_hand)
 }
@@ -154,14 +154,14 @@ function giveCard(deck, hand, num){
 }
 
 function start() {
-  dealCards(deck, player_hand, dealer_hand)
-  displaySum(dealer_hand, player_hand)
+  dealCards()
+  displaySum()
 
   let playHit = promptChoice('Do you want to hit? (yes/no)')
   if (playHit) {
     hit()
   } else {
-    stand(player_hand, dealer_hand)
+    stand()
   }
 
   // let playAgain = confirm('Do you want to play again?')
