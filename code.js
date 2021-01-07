@@ -57,21 +57,115 @@
     sum_hand(dealer_hand) >= sum_hand(player_hand)
  */
 
- let deck_of_cards = [1,2,3,4,5,6,7,8,9,10]
+ let deck = [1,2,3,4,5,6,7,8,9,10]
  let dealer_hand = []
  let player_hand = []
 
 /**
  * Deal 2 cards to the player and the dealer 
  */
-function deal_cards () {
-  for (let i = 0; i < 2; i++) {
-    let card = deck_of_cards.splice(Math.floor(Math.random() * deck_of_cards.length), 1)
-    player_hand.push(card)
+// function deal_cards () {
+//   for (let i = 0; i < 2; i++) {
+//     let card = deck_of_cards.splice(Math.floor(Math.random() * deck_of_cards.length), 1)
+//     player_hand.push(card)
+//   }
+
+//   for (let i = 0; i < 2; i++) {
+//     let card = deck_of_cards.splice(Math.floor(Math.random() * deck_of_cards.length), 1)
+//     dealer_hand.push(card)
+//   }
+// }
+
+function promptChoice(question) {
+  let res = prompt(question)
+
+  if (res === 'yes') {
+    return true
+  } else if (res === 'no') {
+    return false
+  } else {
+    alert('Invalid input! Enter a yes or no')
+    return promptChoice(question)
+  }
+}
+
+function displaySum (player_hand, dealer_hand) {
+  console.log('Your sum: ', sumHand(player_hand))
+  console.log('Dealer\'s hand sum:', sumHand(dealer_hand))
+}
+
+function determineOutcome (player_hand, dealer_hand) {
+  if (sumHand(dealer_hand) > sumHand(player_hand)) {
+    console.log('YOU LOSE')
+  } else {
+    console.log('YOU WON')
+  }
+}
+
+function reset (deck, player_hand, dealer_hand) {
+  // Needs to replenish deck of cards
+  // Clear player_hand, dealer_hand
+
+  deck.splice(0, deck.length)
+  for (let i = 0; i < 10; i++) {
+    deck.push(i + 1)
   }
 
-  for (let i = 0; i < 2; i++) {
-    let card = deck_of_cards.splice(Math.floor(Math.random() * deck_of_cards.length), 1)
-    dealer_hand.push(card)
+  player_hand = []
+  dealer_hand = []
+}
+
+function hit (hand) {
+  giveCard(hand)
+}
+
+function stand (player_hand, dealer_hand) {
+  displaySum(player_hand, dealer_hand)
+  determineOutcome(player_hand, dealer_hand)
+}
+
+function sumHand (hand) {
+  let sum = 0;
+  for(let i = 0; i < hand.length; i++)
+  {
+    sum += hand[i]
   }
+  return sum
+} 
+
+function dealCards (deck) {
+  // Randomly take cards from deck and put in hand
+  
+  let random1 = Math.floor(Math.random() * Math.floor(deck.length));
+ //console.log (deck[random1])
+  //console.log (deck)
+  let random2 = Math.floor(Math.random() * Math.floor(deck.length));
+ // console.log (deck[random2])
+ let temphand = deck.splice (random2, 1)
+ let newArray = temphand.concat(deck.splice (random1, 1))
+
+ return newArray
+}
+
+function giveCard(deck, hand, num){
+  for (i = 0; i < num; i++){
+    hand.push(dealCard(deck))
+  }
+}
+
+function start() {
+  dealCards(deck, player_hand, dealer_hand)
+  displaySum(dealer_hand, player_hand)
+
+  let playHit = promptChoice('Do you want to hit? (yes/no)')
+  if (playHit) {
+    hit()
+  } else {
+    stand(player_hand, dealer_hand)
+  }
+
+  // let playAgain = confirm('Do you want to play again?')
+  // if (playAgain) {
+  //   reset()
+  // }
 }
